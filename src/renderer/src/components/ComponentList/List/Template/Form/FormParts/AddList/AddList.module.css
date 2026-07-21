@@ -1,0 +1,46 @@
+.addList {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--standard-border-color);
+}
+
+.noteSec {
+  height: 60px;
+  display: flex;
+  margin-top: 12px;
+}
+
+.noteSec > .empty {
+  width: 120px;
+}
+
+.noteSec > .note {
+  flex: 1;
+  padding: 0 16px;
+  border-top: 1px solid var(--standard-border-color);
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.noteSec > .note > p {
+  position: absolute;
+  top: -12px;
+  background: #fff;
+  padding: 0 4px;
+  font-weight: bold;
+}
+
+.noteSec > .note > textarea {
+  flex: 1;
+  padding: 6px 8px;
+  color: var(--standard-font-color);
+  font-size: 0.8rem;
+  height: 40px;
+}
+
+.note > textarea::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}

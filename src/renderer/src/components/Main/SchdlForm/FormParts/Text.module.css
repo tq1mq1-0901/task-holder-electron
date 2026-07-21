@@ -1,0 +1,21 @@
+.label {
+  display: flex;
+  margin-top: 8px;
+}
+
+.label input[type='text'],
+.label textarea {
+  flex: 2;
+  padding: 0 8px;
+}
+
+.label textarea {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  height: 60px;
+}
+
+.label textarea::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}

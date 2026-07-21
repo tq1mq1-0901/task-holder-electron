@@ -1,0 +1,63 @@
+.timeSec {
+  height: 50px;
+  display: flex;
+}
+
+.times {
+  padding: 0 8px;
+  display: flex;
+  gap: 8px;
+  font-size: 1rem;
+  align-items: center;
+}
+
+.startTime,
+.endTime {
+  padding: 2px 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  background: var(--blue);
+  color: #fff;
+  transition: opacity 0.3s;
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.timeBtns {
+  flex: 1;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 8px;
+  border-top: 1px solid var(--standard-border-color);
+}
+
+.startBtns,
+.endBtns {
+  position: relative;
+  display: flex;
+  gap: 8px;
+}
+
+.startBtns > p,
+.endBtns > p {
+  position: absolute;
+  top: -20px;
+  background: #fff;
+  padding: 0 4px;
+  font-weight: bold;
+}
+
+.timeBtns button {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  text-align: center;
+}
+
+.minBtn {
+  font-size: 0.5rem;
+  background: var(--green);
+}

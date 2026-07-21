@@ -1,0 +1,25 @@
+.schdl {
+  width: 20%;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  border-bottom: 1px solid var(--standard-border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+}
+
+.items {
+  flex: 1;
+  padding: 16px 0;
+  overflow: auto;
+}
+
+.items::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}

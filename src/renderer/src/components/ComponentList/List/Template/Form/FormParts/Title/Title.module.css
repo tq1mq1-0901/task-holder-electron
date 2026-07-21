@@ -1,0 +1,14 @@
+.titleArea {
+  display: flex;
+  gap: 32px;
+  cursor: pointer;
+}
+.titleArea > span,
+.titleArea > input {
+  width: 4rem;
+  padding: 4px 8px;
+  font-size: 1rem;
+}
+.titleArea > input {
+  flex: 1;
+}

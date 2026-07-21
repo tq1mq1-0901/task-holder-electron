@@ -1,0 +1,129 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.templateSec {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.templateSec::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+}
+
+.headTitle {
+  font-size: 1.2rem;
+  display: flex;
+  gap: 4px;
+}
+
+.headTitle .title {
+  text-decoration: underline;
+}
+
+.formBtn {
+  width: 40px;
+  height: 25px;
+  text-align: center;
+  margin-left: auto;
+  border-radius: 12px;
+}
+
+.templates {
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.content {
+  /* pの高さ分引いてある */
+  height: calc(100% - 25px);
+  overflow: auto;
+  display: flex;
+}
+
+.content::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.ul {
+  height: calc(25px * 48);
+  padding: 8px 0 0;
+}
+
+.times {
+  width: 40px;
+}
+
+.time {
+  width: 40px;
+  height: 25px;
+  border-top: 1px solid #000;
+  font-size: var(--small-font-size);
+  color: #000;
+  position: relative;
+}
+
+.time > span {
+  position: absolute;
+  top: -8px;
+  left: 4px;
+  background: #fff;
+  padding: 0 1px;
+}
+
+.timeHalf {
+  /* widthとmargin-left:auto;指定でborderの左側を切る */
+  width: 5px;
+  margin-left: auto;
+  height: 25px;
+  border-top: 1px solid #000;
+  padding: 0 4px;
+}
+
+.items {
+  flex: 1;
+  position: relative;
+}
+
+.item {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  /* positionによってwidthの継承がなくなることを抑制 */
+  width: 100%;
+  cursor: pointer;
+  overflow: hidden;
+  padding: 0 8px;
+  vertical-align: top;
+  transition: opacity 0.3s;
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.trashCan {
+  background: var(--gray-background-color);
+  width: 100%;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

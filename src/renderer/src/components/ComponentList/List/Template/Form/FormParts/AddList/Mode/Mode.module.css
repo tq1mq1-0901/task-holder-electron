@@ -1,0 +1,18 @@
+.modes {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: 1px solid var(--standard-border-color);
+  height: 32px;
+}
+
+.modeItem > label {
+  display: flex;
+  align-items: center;
+  padding: 2px 6px 2px 2px;
+  border-radius: 8px;
+  transition: background 0.3s;
+  &:hover {
+    background: var(--gray-background-color);
+  }
+}

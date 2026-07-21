@@ -1,0 +1,54 @@
+.cal {
+  /* 一つのグリッド(40px) * 7個分 */
+  width: 280px;
+  margin: 0 auto;
+  border: 1px solid var(--standard-black);
+  border-radius: 8px;
+  overflow: hidden;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  left: 0;
+}
+
+.calHead {
+  display: grid;
+  grid-template-columns: 40px 200px 40px;
+  grid-template-rows: 40px;
+  background-color: var(--gray-background-color);
+  /* 継承するスタイル */
+  text-align: center;
+  font-weight: bold;
+}
+
+.calYearmonth {
+  line-height: 40px;
+}
+
+.calPrev,
+.calNext {
+  background: none;
+  color: #000;
+  transition:
+    background 0.3s,
+    color 0.3s;
+  line-height: 40px;
+  &:hover {
+    background: #000;
+    color: #fff;
+  }
+}
+
+.calBody {
+  display: grid;
+  grid-template-columns: repeat(7, 40px);
+  grid-auto-rows: 40px;
+  /* 継承するスタイル */
+  text-align: center;
+}
+
+.day {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+}

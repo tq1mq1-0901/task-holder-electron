@@ -1,0 +1,26 @@
+.item {
+  width: 80%;
+  margin: 0 auto;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.time,
+.title,
+.note {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.time,
+.title {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.noteContent {
+  font-size: var(--small-font-size);
+}

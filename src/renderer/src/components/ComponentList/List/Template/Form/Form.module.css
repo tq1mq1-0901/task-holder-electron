@@ -1,0 +1,45 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+}
+
+/* inputs */
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+/* mainArea */
+
+.mainArea {
+  height: 300px;
+  margin-top: 16px;
+  display: flex;
+  gap: 32px;
+}
+.mainArea > p {
+  width: 4rem;
+  padding: 4px 8px;
+  font-size: 1rem;
+}
+.mainArea > .contents {
+  flex: 1;
+  border: 1px solid var(--standard-border-color);
+  border-radius: 8px;
+  display: flex;
+}
+/* option */
+
+.options {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: auto;
+  height: 40px;
+}
+.addBtn {
+  margin-left: auto;
+  padding: 6px 12px;
+  border-radius: 8px;
+}

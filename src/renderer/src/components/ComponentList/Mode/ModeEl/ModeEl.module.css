@@ -1,0 +1,18 @@
+.mode > label {
+  width: 80%;
+  display: flex;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 0 0 2px;
+  transition: background 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--gray-background-color);
+  }
+}
+.mode > label > span {
+  display: block;
+  padding: 2px 0 0;
+}

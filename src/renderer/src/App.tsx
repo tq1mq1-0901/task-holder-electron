@@ -1,33 +1,71 @@
-import Versions from './components/Versions'
-import electronLogo from './assets/electron.svg'
+import './App.css'
+import { Header } from './components/Header/Header'
+import { Main } from './components/Main/Main'
+import { ComponentList } from './components/ComponentList/ComponentList'
+import { useState } from 'react'
+import {
+  leftMainStates,
+  type LeftMainState,
+  type DspSchdl,
+  type DspTodo,
+  type Memo
+} from './types/index'
+import { useLocalStorage } from './hooks'
+
+const colors = [
+  'red',
+  'blue',
+  'green',
+  'yellow',
+  'pink',
+  'skyblue',
+  'purple',
+  'orange',
+  'brown',
+  'gray'
+]
 
 function App(): React.JSX.Element {
-  const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
+  const [trgtMon, setTrgtMon] = useState<Date>(
+    new Date(new Date().getFullYear(), new Date().getMonth(), 1)
+  )
+  const [trgtDate, setTrgtDate] = useState<Date>(new Date())
+  const today = new Date()
+  const [leftMainState, setLeftMainState] = useState<LeftMainState>(leftMainStates.schedule)
+  const [isAddOpen, setIsAddOpen] = useState<boolean>(true)
+  const [dspTodos, setDspTodos] = useLocalStorage<DspTodo[]>('dspTodos', [])
+  const [dspSchdls, setDspSchdls] = useLocalStorage<DspSchdl[]>('dspSchdls', [])
+  const [memos, setMemos] = useLocalStorage<Memo[]>('memos', [])
 
   return (
     <>
-      <img alt="logo" className="logo" src={electronLogo} />
-      <div className="creator">Powered by electron-vite</div>
-      <div className="text">
-        Build an Electron app with <span className="react">React</span>
-        &nbsp;and <span className="ts">TypeScript</span>
-      </div>
-      <p className="tip">
-        Please try pressing <code>F12</code> to open the devTool
-      </p>
-      <div className="actions">
-        <div className="action">
-          <a href="https://electron-vite.org/" target="_blank" rel="noreferrer">
-            Documentation
-          </a>
-        </div>
-        <div className="action">
-          <a target="_blank" rel="noreferrer" onClick={ipcHandle}>
-            Send IPC
-          </a>
-        </div>
-      </div>
-      <Versions></Versions>
+      <Header
+        setTrgtMon={setTrgtMon}
+        trgtDate={trgtDate}
+        setTrgtDate={setTrgtDate}
+        today={today}
+        leftMainState={leftMainState}
+        setLeftMainState={setLeftMainState}
+        isAddOpen={isAddOpen}
+        setIsAddOpen={setIsAddOpen}
+      />
+      <Main
+        trgtMon={trgtMon}
+        setTrgtMon={setTrgtMon}
+        trgtDate={trgtDate}
+        setTrgtDate={setTrgtDate}
+        today={today}
+        leftMainState={leftMainState}
+        dspTodos={dspTodos}
+        setDspTodos={setDspTodos}
+        dspSchdls={dspSchdls}
+        setDspSchdls={setDspSchdls}
+        isAddOpen={isAddOpen}
+        colors={colors}
+        memos={memos}
+        setMemos={setMemos}
+      />
+      {isAddOpen && <ComponentList colors={colors} />}
     </>
   )
 }

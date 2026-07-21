@@ -1,0 +1,62 @@
+.header {
+  display: flex;
+  align-items: center;
+  background: var(--gray-background-color);
+  padding: 0 32px;
+  border-bottom: 1px solid var(--standard-border-color);
+  height: 12.5%;
+  min-height: 50px;
+  overflow: hidden;
+}
+
+.year {
+  font-size: 2.4rem;
+}
+
+.btnContainers {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.btnContainer {
+  background: #fff;
+  padding: 6px 12px;
+  display: flex;
+  gap: 8px;
+  border-radius: 8px;
+  position: relative;
+}
+
+.containerTitle {
+  position: absolute;
+  top: -16px;
+  left: 0;
+  font-size: var(--small-font-size);
+  border-radius: 2px;
+  padding: 0 4px;
+  font-weight: bold;
+}
+
+.squareBtn {
+  padding: 4px 6px;
+  border-radius: 8px;
+}
+
+.circleBtn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 28px;
+}
+
+.activeBtn {
+  background: var(--gray-background-color);
+  color: var(--standard-font-color);
+  transition: none;
+  &:hover {
+    opacity: 1;
+  }
+}

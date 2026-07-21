@@ -1,0 +1,54 @@
+.main {
+  min-height: 320px;
+}
+
+.mainShort {
+  display: flex;
+  height: 62.5%;
+}
+
+.mainTall {
+  display: flex;
+  height: 87.5%;
+}
+
+/* メイン左 */
+
+.left {
+  flex: 1;
+  min-width: 390px;
+  display: flex;
+}
+
+.schedule {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.schedule > section + section {
+  /* これはScheduleコンポーネント適用 */
+  border-left: 1px solid var(--standard-border-color);
+}
+
+.todo {
+  width: 100%;
+}
+
+.memo {
+  width: 100%;
+}
+
+/* メイン右 */
+
+.right {
+  width: 320px;
+  border-left: 1px solid var(--standard-border-color);
+  overflow: auto;
+  position: relative;
+}
+
+.right::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}

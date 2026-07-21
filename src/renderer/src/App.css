@@ -1,0 +1,230 @@
+/* common */
+
+:root {
+  --button-color: #0d6efd;
+  --button-box-shadow-size: 2px;
+  --semi-button-color: #1de185;
+  --gray-background-color: #eaeaea;
+  /* 基本的に黒を使うところに適用 */
+  --standard-black: #555;
+  /* ボーダーを使うところに適用 */
+  --standard-border-color: #ccc;
+  --standard-font-size: 0.8rem;
+  --small-font-size: 0.6rem;
+  --container-box-shadow-size: 2px;
+
+  /* 色 */
+  --red: #ff3232;
+  --blue: #1919ff;
+  --green: #28c76f;
+  --yellow: #e9ff3f;
+  --pink: #fcadba;
+  --skyblue: #6ec4e6;
+  --purple: #800080;
+  --orange: #ffa500;
+  --brown: #8b4513;
+  --gray: #9e9e9e;
+}
+
+* {
+  user-select: none;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  /* 全体の文字を少し薄める */
+  color: var(--standard-black);
+  font-size: var(--standard-font-size);
+}
+
+#root {
+  /* index.htmlの#rootにもheight100%を指定 */
+  height: 100%;
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* buttonに固有のスタイルをあらかじめつけておく */
+button {
+  all: unset;
+  background: var(--button-color);
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: #666;
+  opacity: 0.5;
+  z-index: 100;
+}
+
+.form {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  left: 10%;
+  bottom: 10%;
+  background: #fff;
+  z-index: 200;
+  border-radius: 16px;
+  overflow: hidden;
+  padding: 24px;
+}
+
+.error {
+  font-size: 0.6rem;
+  color: var(--red);
+  opacity: 1;
+}
+
+/* 色クラス（各コンポーネントのカラー表示に共通利用） */
+.red {
+  background: var(--red);
+  color: #fff;
+}
+.blue {
+  background: var(--blue);
+  color: #fff;
+}
+.green {
+  background: var(--green);
+  color: #000;
+}
+.yellow {
+  background: var(--yellow);
+  color: #000;
+}
+.pink {
+  background: var(--pink);
+  color: #000;
+}
+.skyblue {
+  background: var(--skyblue);
+  color: #000;
+}
+.purple {
+  background: var(--purple);
+  color: #fff;
+}
+.orange {
+  background: var(--orange);
+  color: #000;
+}
+.brown {
+  background: var(--brown);
+  color: #fff;
+}
+.gray {
+  background: var(--gray);
+  color: #fff;
+}
+
+/* 色containerクラス（各色の80%暗い色を影として立体感を演出） */
+.red-container {
+  box-shadow: 0 var(--container-box-shadow-size) 0 rgb(204, 40, 40);
+  &:active {
+    transform: translateY(var(--container-box-shadow-size));
+    box-shadow: none;
+  }
+}
+.blue-container {
+  box-shadow: 0 var(--container-box-shadow-size) 0 rgb(20, 20, 204);
+  &:active {
+    transform: translateY(var(--container-box-shadow-size));
+    box-shadow: none;
+  }
+}
+.green-container {
+  box-shadow: 0 var(--container-box-shadow-size) 0 rgb(32, 159, 89);
+  &:active {
+    transform: translateY(var(--container-box-shadow-size));
+    box-shadow: none;
+  }
+}
+.yellow-container {
+  box-shadow: 0 var(--container-box-shadow-size) 0 rgb(186, 204, 50);
+  &:active {
+    transform: translateY(var(--container-box-shadow-size));
+    box-shadow: none;
+  }
+}
+.pink-container {
+  box-shadow: 0 var(--container-box-shadow-size) 0 rgb(202, 138, 149);
+  &:active {
+    transform: translateY(var(--container-box-shadow-size));
+    box-shadow: none;
+  }
+}
+.skyblue-container {
+  box-shadow: 0 var(--container-box-shadow-size) 0 rgb(88, 157, 184);
+  &:active {
+    transform: translateY(var(--container-box-shadow-size));
+    box-shadow: none;
+  }
+}
+.purple-container {
+  box-shadow: 0 var(--container-box-shadow-size) 0 rgb(102, 0, 102);
+  &:active {
+    transform: translateY(var(--container-box-shadow-size));
+    box-shadow: none;
+  }
+}
+.orange-container {
+  box-shadow: 0 var(--container-box-shadow-size) 0 rgb(204, 132, 0);
+  &:active {
+    transform: translateY(var(--container-box-shadow-size));
+    box-shadow: none;
+  }
+}
+.brown-container {
+  box-shadow: 0 var(--container-box-shadow-size) 0 rgb(111, 55, 15);
+  &:active {
+    transform: translateY(var(--container-box-shadow-size));
+    box-shadow: none;
+  }
+}
+.gray-container {
+  box-shadow: 0 var(--container-box-shadow-size) 0 rgb(126, 126, 126);
+  &:active {
+    transform: translateY(var(--container-box-shadow-size));
+    box-shadow: none;
+  }
+}
+
+/* フォームのフィールドタイトル */
+.formTitle {
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 2px 8px;
+  flex: 1;
+}
+
+/* 必須項目マーカー */
+.requiredAlert::after {
+  font-size: 0.6rem;
+  content: ' (required)';
+  color: red;
+}

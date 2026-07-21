@@ -1,0 +1,81 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.todoSec {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.todoSec::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+}
+
+.headTitle {
+  font-size: 1.2rem;
+  display: flex;
+  gap: 4px;
+}
+
+.headTitle .title {
+  text-decoration: underline;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.formInp {
+  padding: 4px 6px;
+}
+
+.formBtn {
+  width: 40px;
+  height: 25px;
+  text-align: center;
+  border-radius: 12px;
+}
+
+.todoList {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 12px;
+}
+
+.todo {
+  padding: 4px 6px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.trashCan {
+  background: var(--gray-background-color);
+  width: 100%;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

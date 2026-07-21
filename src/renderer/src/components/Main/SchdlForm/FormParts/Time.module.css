@@ -1,0 +1,85 @@
+.timeSec {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.content {
+  flex: 2;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.times {
+  flex: 1;
+  display: flex;
+  gap: 8px;
+  font-size: 1.2rem;
+}
+
+.startTime,
+.endTime {
+  padding: 4px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  background: var(--blue);
+  color: #fff;
+  transition: opacity 0.3s;
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.waveLine {
+  padding: 4px 8px;
+}
+
+.duration {
+  margin-left: 32px;
+  height: 1.5rem;
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.btns {
+  display: flex;
+  flex: 2;
+  border-top: 1px solid #000;
+  padding: 8px 0 0 16px;
+}
+
+.startBtns,
+.endBtns {
+  position: relative;
+  display: flex;
+  gap: 8px;
+}
+
+.startBtns > p,
+.endBtns > p {
+  position: absolute;
+  top: -20px;
+  padding: 0 4px;
+  background: #fff;
+  font-weight: bold;
+}
+
+.btns button {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  text-align: center;
+}
+
+.minBtn {
+  font-size: 0.5rem;
+  background: var(--green);
+}
