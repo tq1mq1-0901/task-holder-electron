@@ -88,10 +88,10 @@ button {
   left: 10%;
   bottom: 10%;
   background: #fff;
-  z-index: 200;
   border-radius: 16px;
   overflow: hidden;
   padding: 24px;
+  z-index: 200;
 }
 
 .error {

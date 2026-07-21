@@ -11,6 +11,7 @@ import {
   type Memo
 } from './types/index'
 import { useLocalStorage } from './hooks'
+import { Confirm } from './components/common/Confirm/Confirm'
 
 const colors = [
   'red',
@@ -66,6 +67,11 @@ function App(): React.JSX.Element {
         setMemos={setMemos}
       />
       {isAddOpen && <ComponentList colors={colors} />}
+      <Confirm
+        title={'確認メッセージ'}
+        sentence={'これはApp.tsxからのConfirmメッセージです。'}
+        note={'(これはこのConfirmの注釈です。)'}
+      />
     </>
   )
 }
