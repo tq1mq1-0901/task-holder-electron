@@ -4,9 +4,13 @@ interface Props {
   title: string
   sentence: string
   note?: string
+  onOk(): void
+  onCancel(): void
 }
 
-export function Confirm({ title, sentence, note }: Props): React.JSX.Element {
+export function Confirm(props: Props): React.JSX.Element {
+  const { title, sentence, note, onOk, onCancel } = props
+
   return (
     <>
       <div className="mask"></div>
@@ -17,8 +21,12 @@ export function Confirm({ title, sentence, note }: Props): React.JSX.Element {
           <p className={styles.note}>{note}</p>
         </section>
         <section className={styles.btns}>
-          <button className={styles.ok}>OK</button>
-          <button className={styles.cancel}>Cancel</button>
+          <button className={styles.ok} onClick={onOk}>
+            OK
+          </button>
+          <button className={styles.cancel} onClick={onCancel}>
+            Cancel
+          </button>
         </section>
       </div>
     </>

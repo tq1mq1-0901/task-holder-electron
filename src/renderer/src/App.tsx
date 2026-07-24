@@ -2,13 +2,14 @@ import './App.css'
 import { Header } from './components/Header/Header'
 import { Main } from './components/Main/Main'
 import { ComponentList } from './components/ComponentList/ComponentList'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import {
   leftMainStates,
   type LeftMainState,
   type DspSchdl,
   type DspTodo,
-  type Memo
+  type Memo,
+  ConfirmTexts
 } from './types/index'
 import { useLocalStorage } from './hooks'
 import { Confirm } from './components/common/Confirm/Confirm'
@@ -37,6 +38,30 @@ function App(): React.JSX.Element {
   const [dspTodos, setDspTodos] = useLocalStorage<DspTodo[]>('dspTodos', [])
   const [dspSchdls, setDspSchdls] = useLocalStorage<DspSchdl[]>('dspSchdls', [])
   const [memos, setMemos] = useLocalStorage<Memo[]>('memos', [])
+  const [confirmState, setConfirmState] = useState<{
+    isDisplayed: boolean
+    texts: ConfirmTexts
+  } | null>(null)
+
+  // resolveの引数に値を入れないようにresolveRef.currentの中にresolve関数を幽閉(引数を入れないことにより、結果的にconfirmが止まる。)
+  const resolveRef = useRef<((response: boolean) => void) | null>(null)
+
+  function confirm(texts: ConfirmTexts): Promise<boolean> {
+    setConfirmState({
+      isDisplayed: true,
+      texts
+    })
+    // resolveに引数が入るまで、このreturnでストップする。
+    return new Promise<boolean>((resolve) => {
+      resolveRef.current = resolve
+    })
+  }
+
+  // resolveRef.currentにresolveがあるので、そこに引数を入れてconfirmをリスタートさせ、confirmを閉じる。
+  const handleConfirmResponse = (response: boolean): void => {
+    resolveRef.current?.(response)
+    setConfirmState(null)
+  }
 
   return (
     <>
@@ -67,11 +92,15 @@ function App(): React.JSX.Element {
         setMemos={setMemos}
       />
       {isAddOpen && <ComponentList colors={colors} />}
-      <Confirm
-        title={'確認メッセージ'}
-        sentence={'これはApp.tsxからのConfirmメッセージです。'}
-        note={'(これはこのConfirmの注釈です。)'}
-      />
+      {confirmState?.isDisplayed && (
+        <Confirm
+          title={confirmState?.texts.title ?? ''}
+          sentence={confirmState?.texts.sentence ?? ''}
+          note={confirmState?.texts.note ?? ''}
+          onOk={() => handleConfirmResponse(true)}
+          onCancel={() => handleConfirmResponse(false)}
+        />
+      )}
     </>
   )
 }

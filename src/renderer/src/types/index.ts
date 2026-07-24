@@ -105,3 +105,9 @@ export const operatedTimeObj = {
   end: 'end'
 } as const
 export type OperatedTime = (typeof operatedTimeObj)[keyof typeof operatedTimeObj]
+
+export interface ConfirmTexts {
+  title: string
+  sentence: string
+  note: string
+}
