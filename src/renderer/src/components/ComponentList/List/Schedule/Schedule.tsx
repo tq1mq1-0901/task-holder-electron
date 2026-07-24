@@ -1,4 +1,4 @@
-import type { AddSchedule } from '../../../../types'
+import type { AddSchedule, ConfirmTexts } from '../../../../types'
 import styles from './Schedule.module.css'
 import { Form } from './Form/Form'
 import { TrushCan } from '../TrushCan/TrushCan'
@@ -7,9 +7,12 @@ interface Props {
   addSchedules: AddSchedule[]
   setAddSchedules(addSchedules: AddSchedule[]): void
   colors: string[]
+  confirm(texts: ConfirmTexts): Promise<boolean>
 }
 
-export const Schedule = ({ addSchedules, setAddSchedules, colors }: Props) => {
+export const Schedule = (props: Props): React.JSX.Element => {
+  const { addSchedules, setAddSchedules, colors, confirm } = props
+
   const MIMEType = 'add/schedule'
 
   const scheduleLists = addSchedules.map((schedule) => (
@@ -35,7 +38,12 @@ export const Schedule = ({ addSchedules, setAddSchedules, colors }: Props) => {
         </section>
         <ul className={styles.schedules}>{scheduleLists}</ul>
       </section>
-      <TrushCan MIMEType={MIMEType} lists={addSchedules} setter={setAddSchedules} />
+      <TrushCan
+        MIMEType={MIMEType}
+        lists={addSchedules}
+        setter={setAddSchedules}
+        confirm={confirm}
+      />
     </section>
   )
 }

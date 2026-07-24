@@ -6,7 +6,8 @@ import {
   type LeftMainState,
   type DspSchdl,
   type DspTodo,
-  type Memo
+  type Memo,
+  ConfirmTexts
 } from '../../types'
 import { Todo } from './Todo/Todo'
 import { createDateFormatStr, createDisplaySchedules } from '../../util'
@@ -27,6 +28,7 @@ interface Props {
   colors: string[]
   memos: Memo[]
   setMemos(memos: Memo[]): void
+  confirm(texts: ConfirmTexts): Promise<boolean>
 }
 
 export const Main = (props: Props): React.JSX.Element => {
@@ -43,7 +45,8 @@ export const Main = (props: Props): React.JSX.Element => {
     isAddOpen,
     colors,
     memos,
-    setMemos
+    setMemos,
+    confirm
   } = props
 
   const prcDate = new Date(trgtDate.getFullYear(), trgtDate.getMonth(), trgtDate.getDate() - 1)
@@ -69,6 +72,7 @@ export const Main = (props: Props): React.JSX.Element => {
               dspSchdls={dspSchdls}
               setDspSchdls={setDspSchdls}
               colors={colors}
+              confirm={confirm}
             />
             <Schedule
               key={trgtDate.toDateString()}
@@ -79,6 +83,7 @@ export const Main = (props: Props): React.JSX.Element => {
               dspSchdls={dspSchdls}
               setDspSchdls={setDspSchdls}
               colors={colors}
+              confirm={confirm}
             />
             <Schedule
               key={nxtDate.toDateString()}
@@ -89,6 +94,7 @@ export const Main = (props: Props): React.JSX.Element => {
               dspSchdls={dspSchdls}
               setDspSchdls={setDspSchdls}
               colors={colors}
+              confirm={confirm}
             />
           </section>
         )}
@@ -103,6 +109,7 @@ export const Main = (props: Props): React.JSX.Element => {
               colors={colors}
               dspSchdls={dspSchdls}
               setDspSchdls={setDspSchdls}
+              confirm={confirm}
             />
           </section>
         )}

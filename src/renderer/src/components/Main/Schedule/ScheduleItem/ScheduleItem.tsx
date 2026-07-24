@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { DspSchdl } from '../../../../types'
+import type { ConfirmTexts, DspSchdl } from '../../../../types'
 import styles from './ScheduleItem.module.css'
 import { createPortal } from 'react-dom'
 import { ItemDetail } from './ItemDetail/ItemDetail'
@@ -8,10 +8,11 @@ interface Props {
   schedule: DspSchdl
   dspSchdls: DspSchdl[]
   setDspSchdls(schdls: DspSchdl[]): void
+  confirm(texts: ConfirmTexts): Promise<boolean>
 }
 
 export const ScheduleItem = (props: Props): React.JSX.Element => {
-  const { schedule, dspSchdls, setDspSchdls } = props
+  const { schedule, dspSchdls, setDspSchdls, confirm } = props
 
   const [showDetails, setShowDetails] = useState(false)
 
@@ -43,6 +44,7 @@ export const ScheduleItem = (props: Props): React.JSX.Element => {
             setShowDetails={setShowDetails}
             dspSchdls={dspSchdls}
             setDspSchdls={setDspSchdls}
+            confirm={confirm}
           />,
           document.body
         )}

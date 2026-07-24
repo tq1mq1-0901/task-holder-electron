@@ -7,7 +7,8 @@ import {
   type AddTemplate,
   type AddTemplateSchdl,
   type AddTemplateTodo,
-  type AddTodo
+  type AddTodo,
+  ConfirmTexts
 } from '../../../../../types'
 import { useState, useRef } from 'react'
 import { Schedule } from './FormParts/Schedule/Schedule'
@@ -24,6 +25,7 @@ interface Props {
   setAddTemplates(addTemplates: AddTemplate[]): void
   modifiedTemplate: AddTemplate | null
   setModifiedTemplate(addTemplateOrNull: AddTemplate | null): void
+  confirm(texts: ConfirmTexts): Promise<boolean>
 }
 
 export const Form = (props: Props): React.JSX.Element => {
@@ -35,7 +37,8 @@ export const Form = (props: Props): React.JSX.Element => {
     addTemplates,
     setAddTemplates,
     modifiedTemplate,
-    setModifiedTemplate
+    setModifiedTemplate,
+    confirm
   } = props
 
   const [titleValue, setTitleValue] = useState(modifiedTemplate ? modifiedTemplate.title : '')
@@ -159,6 +162,7 @@ export const Form = (props: Props): React.JSX.Element => {
                 setTimeStraddleError={setTimeStraddleError}
                 resetAllErrorMessage={resetAllErrorMessage}
                 setTodosLimitError={setTodosLimitError}
+                confirm={confirm}
               />
               <Todo
                 addTemplateTodos={addTemplateTodos}
@@ -174,6 +178,7 @@ export const Form = (props: Props): React.JSX.Element => {
                 setTodosLimitError={setTodosLimitError}
                 setTimeStraddleError={setTimeStraddleError}
                 resetAllErrorMessage={resetAllErrorMessage}
+                confirm={confirm}
               />
               <AddList
                 modes={modes}

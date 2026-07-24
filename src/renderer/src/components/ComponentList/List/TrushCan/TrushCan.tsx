@@ -1,19 +1,28 @@
-import type { AddAny } from '../../../../types'
+import type { AddAny, ConfirmTexts } from '../../../../types'
 import styles from './TrushCan.module.css'
 
 interface Props {
   MIMEType: string
   lists: AddAny[]
   setter(lists: AddAny[]): void
+  confirm(texts: ConfirmTexts): Promise<boolean>
 }
 
 export const TrushCan = (props: Props): React.JSX.Element => {
-  const { MIMEType, lists, setter } = props
+  const { MIMEType, lists, setter, confirm } = props
 
-  const handleDropTrashCan = (e: React.DragEvent<HTMLDivElement>): void => {
-    if (!confirm('Delete this item?')) return
-
+  const handleDropTrashCan = async (e: React.DragEvent<HTMLDivElement>): Promise<void> => {
     const trgtEl: AddAny = JSON.parse(e.dataTransfer.getData(MIMEType))
+
+    if (
+      !(await confirm({
+        title: '削除',
+        sentence: `「${trgtEl.title}」を削除しますか？`,
+        note: ''
+      }))
+    )
+      return
+
     const newLists = lists.filter((el) => el.id !== trgtEl.id)
     setter(newLists)
   }

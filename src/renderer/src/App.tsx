@@ -90,8 +90,9 @@ function App(): React.JSX.Element {
         colors={colors}
         memos={memos}
         setMemos={setMemos}
+        confirm={confirm}
       />
-      {isAddOpen && <ComponentList colors={colors} />}
+      {isAddOpen && <ComponentList colors={colors} confirm={confirm} />}
       {confirmState?.isDisplayed && (
         <Confirm
           title={confirmState?.texts.title ?? ''}

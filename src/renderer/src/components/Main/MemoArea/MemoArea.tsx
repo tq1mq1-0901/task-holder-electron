@@ -20,9 +20,7 @@ export const MemoArea = ({ trgtDate, memos, setMemos }: Props): React.JSX.Elemen
 
   const handleInputMemo = (e: React.InputEvent<HTMLTextAreaElement>): void => {
     const inputValue = e.currentTarget.value
-    inputValue.trim() === '' || inputValue.trim() === prevMemo.trim()
-      ? setCanSave(false)
-      : setCanSave(true)
+    inputValue.trim() === prevMemo.trim() ? setCanSave(false) : setCanSave(true)
     setMemo(inputValue)
   }
 

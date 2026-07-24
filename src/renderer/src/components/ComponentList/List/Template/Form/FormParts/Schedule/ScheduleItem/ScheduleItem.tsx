@@ -1,17 +1,25 @@
-import type { AddTemplateSchdl } from '../../../../../../../../types'
+import type { AddTemplateSchdl, ConfirmTexts } from '../../../../../../../../types'
 import styles from './ScheduleItem.module.css'
 
 interface Props {
   schdl: AddTemplateSchdl
   addTemplateSchdls: AddTemplateSchdl[]
   setAddTemplateSchdls(schdls: AddTemplateSchdl[]): void
+  confirm(texts: ConfirmTexts): Promise<boolean>
 }
 
 export const ScheduleItem = (props: Props): React.JSX.Element => {
-  const { schdl, addTemplateSchdls, setAddTemplateSchdls } = props
+  const { schdl, addTemplateSchdls, setAddTemplateSchdls, confirm } = props
 
-  const handleDelSchdl = (): void => {
-    if (!confirm('Delete this Schedule?')) return
+  const handleDelSchdl = async (): Promise<void> => {
+    if (
+      !(await confirm({
+        title: '削除',
+        sentence: `「${schdl.title}」を削除しますか？`,
+        note: ''
+      }))
+    )
+      return
 
     const newAddTemplateSchdls = addTemplateSchdls.filter((el) => el.id !== schdl.id)
     setAddTemplateSchdls(newAddTemplateSchdls)

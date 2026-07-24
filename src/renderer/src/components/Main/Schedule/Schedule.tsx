@@ -5,7 +5,8 @@ import type {
   DspSchdl,
   DspTodo,
   AddTemplateTodo,
-  AddTemplateSchdl
+  AddTemplateSchdl,
+  ConfirmTexts
 } from '../../../types'
 import {
   checkTimeConflict,
@@ -24,10 +25,12 @@ interface Props {
   dspSchdls: DspSchdl[]
   setDspSchdls(schdls: DspSchdl[]): void
   colors: string[]
+  confirm(texts: ConfirmTexts): Promise<boolean>
 }
 
 export const Schedule = (props: Props): React.JSX.Element => {
-  const { trgtDate, trgtSchdls, dspTodos, setDspTodos, dspSchdls, setDspSchdls, colors } = props
+  const { trgtDate, trgtSchdls, dspTodos, setDspTodos, dspSchdls, setDspSchdls, colors, confirm } =
+    props
 
   const [isSchdlAddable, setIsSchdlAddable] = useState(false)
   const [dropedData, setDropedData] = useState<AddSchedule | AddTask | null>(null)
@@ -36,8 +39,15 @@ export const Schedule = (props: Props): React.JSX.Element => {
 
   const dateStr = `${trgtDate.getMonth() + 1}/${trgtDate.getDate()}`
 
-  const handleClickAllDel = (): void => {
-    if (!confirm('Would you like to delete all schedules for this date?')) return
+  const handleClickAllDel = async (): Promise<void> => {
+    if (
+      !(await confirm({
+        title: '削除',
+        sentence: `${createDateFormatStr(trgtDate)}のすべてのスケジュールを削除しますか？`,
+        note: ''
+      }))
+    )
+      return
 
     const newDspSchdls = dspSchdls.filter((schdl) => schdl.date !== createDateFormatStr(trgtDate))
     setDspSchdls(newDspSchdls)
@@ -53,11 +63,12 @@ export const Schedule = (props: Props): React.JSX.Element => {
         schedule={schedule}
         dspSchdls={dspSchdls}
         setDspSchdls={setDspSchdls}
+        confirm={confirm}
       />
     )
   })
 
-  const handleDropSchdl = (e: React.DragEvent<HTMLElement>): void => {
+  const handleDropSchdl = async (e: React.DragEvent<HTMLElement>): Promise<void> => {
     setTodoError(false)
     setConflictError(false)
     const types = Array.from(e.dataTransfer.types)
@@ -121,15 +132,36 @@ export const Schedule = (props: Props): React.JSX.Element => {
         setConflictError(true)
         return
       } else if (data.isTodoTemplate) {
-        if (!confirm(`Overwrite To-Do of this date?`)) return
+        if (
+          !(await confirm({
+            title: '上書き',
+            sentence: `${createDateFormatStr(trgtDate)}のTo${'-'}Doリストを上書きしますか？`,
+            note: '(スケジュールは上書きされません。)'
+          }))
+        )
+          return
         setDspTodos(newDspTodos)
         return
       } else if (data.isSchdlTemplate) {
-        if (!confirm(`Overwrite Schedule of this date?`)) return
+        if (
+          !(await confirm({
+            title: '上書き',
+            sentence: `${createDateFormatStr(trgtDate)}のスケジュールを上書きしますか？`,
+            note: '(To-Doは上書きされません。)'
+          }))
+        )
+          return
         setDspSchdls(newDspSchdls)
         return
       } else {
-        if (!confirm(`Overwrite this date?\n(This include Schedule and To-Do)`)) return
+        if (
+          !(await confirm({
+            title: '上書き',
+            sentence: `${createDateFormatStr(trgtDate)}のすべてのタスクを上書きしますか？`,
+            note: ''
+          }))
+        )
+          return
         setDspTodos(newDspTodos)
         setDspSchdls(newDspSchdls)
       }

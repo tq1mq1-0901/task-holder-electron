@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { AddSchedule, AddTask, AddTemplate, AddTodo } from '../../../../types'
+import type { AddSchedule, AddTask, AddTemplate, AddTodo, ConfirmTexts } from '../../../../types'
 import styles from './Template.module.css'
 import { Form } from './Form/Form'
 import { ListItem } from './ListItem/ListItem'
@@ -12,10 +12,11 @@ interface Props {
   addTodos: AddTodo[]
   addSchedules: AddSchedule[]
   addTasks: AddTask[]
+  confirm(texts: ConfirmTexts): Promise<boolean>
 }
 
 export const Template = (props: Props): React.JSX.Element => {
-  const { addTemplates, setAddTemplates, addTodos, addSchedules, addTasks } = props
+  const { addTemplates, setAddTemplates, addTodos, addSchedules, addTasks, confirm } = props
 
   const MIMEType = 'add/template'
 
@@ -54,12 +55,18 @@ export const Template = (props: Props): React.JSX.Element => {
               setAddTemplates={setAddTemplates}
               modifiedTemplate={modifiedTemplate}
               setModifiedTemplate={setModifiedTemplate}
+              confirm={confirm}
             />
           )}
         </section>
         <ul className={styles.templates}>{templateItems}</ul>
       </section>
-      <TrushCan MIMEType={MIMEType} lists={addTemplates} setter={setAddTemplates} />
+      <TrushCan
+        MIMEType={MIMEType}
+        lists={addTemplates}
+        setter={setAddTemplates}
+        confirm={confirm}
+      />
     </section>
   )
 }

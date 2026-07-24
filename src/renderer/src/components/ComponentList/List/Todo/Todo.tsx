@@ -1,14 +1,15 @@
 import React, { useRef, useState } from 'react'
-import type { AddTodo } from '../../../../types'
+import type { AddTodo, ConfirmTexts } from '../../../../types'
 import styles from './Todo.module.css'
 import { TrushCan } from '../TrushCan/TrushCan'
 
 interface Props {
   addTodos: AddTodo[]
   setAddTodos(addTodos: AddTodo[]): void
+  confirm(texts: ConfirmTexts): Promise<boolean>
 }
 
-export const Todo = ({ addTodos, setAddTodos }: Props): React.JSX.Element => {
+export const Todo = ({ addTodos, setAddTodos, confirm }: Props): React.JSX.Element => {
   const [inputValue, setInputValue] = useState<string>('')
   const inputRef = useRef<HTMLInputElement>(null)
   const MIMEType = 'add/todo'
@@ -24,11 +25,11 @@ export const Todo = ({ addTodos, setAddTodos }: Props): React.JSX.Element => {
     </li>
   ))
 
-  const resetInput = () => {
+  const resetInput = (): void => {
     setInputValue('')
     inputRef.current!.focus()
   }
-  const handleSubmitButton = (e: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmitButton = (e: React.SubmitEvent<HTMLFormElement>): void => {
     e.preventDefault()
     if (inputValue.trim() === '') {
       resetInput()
@@ -61,7 +62,7 @@ export const Todo = ({ addTodos, setAddTodos }: Props): React.JSX.Element => {
         </section>
         <ul className={styles.todoList}>{todoLists}</ul>
       </section>
-      <TrushCan MIMEType={MIMEType} lists={addTodos} setter={setAddTodos} />
+      <TrushCan MIMEType={MIMEType} lists={addTodos} setter={setAddTodos} confirm={confirm} />
     </section>
   )
 }

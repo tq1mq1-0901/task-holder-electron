@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { DspSchdl } from '../../../../../types'
+import type { ConfirmTexts, DspSchdl } from '../../../../../types'
 import styles from './ItemDetail.module.css'
 
 interface Props {
@@ -7,15 +7,23 @@ interface Props {
   setShowDetails(bool: boolean): void
   dspSchdls: DspSchdl[]
   setDspSchdls(dspSchdls: DspSchdl[]): void
+  confirm(texts: ConfirmTexts): Promise<boolean>
 }
 
 export const ItemDetail = (props: Props): React.JSX.Element => {
-  const { trgtSchdl, setShowDetails, dspSchdls, setDspSchdls } = props
+  const { trgtSchdl, setShowDetails, dspSchdls, setDspSchdls, confirm } = props
 
   const [noteValue, setNoteValue] = useState(trgtSchdl.note)
 
-  const handleDelBtn = (): void => {
-    if (!confirm('Delete this Schedule?')) return
+  const handleDelBtn = async (): Promise<void> => {
+    if (
+      !(await confirm({
+        title: '削除',
+        sentence: `「${trgtSchdl.title}」を削除しますか？`,
+        note: ''
+      }))
+    )
+      return
     const newDspSchdls = dspSchdls.filter((schdl) => schdl.id !== trgtSchdl.id)
     setDspSchdls(newDspSchdls)
     setShowDetails(false)

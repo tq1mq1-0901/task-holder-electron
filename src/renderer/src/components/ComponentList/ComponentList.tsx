@@ -2,13 +2,14 @@ import styles from './ComponentList.module.css'
 import { Mode } from './Mode/Mode'
 import { List } from './List/List'
 import { useState } from 'react'
-import { modeValue } from '../../types'
+import { ConfirmTexts, modeValue } from '../../types'
 
 interface Props {
   colors: string[]
+  confirm(texts: ConfirmTexts): Promise<boolean>
 }
 
-export const ComponentList = ({ colors }: Props): React.JSX.Element => {
+export const ComponentList = ({ colors, confirm }: Props): React.JSX.Element => {
   // lazy initializer
   const [modes, setModes] = useState(() => [
     {
@@ -44,7 +45,7 @@ export const ComponentList = ({ colors }: Props): React.JSX.Element => {
   return (
     <section className={styles.section}>
       <Mode modes={modes} setModes={setModes} />
-      <List modes={modes} colors={colors} />
+      <List modes={modes} colors={colors} confirm={confirm} />
     </section>
   )
 }

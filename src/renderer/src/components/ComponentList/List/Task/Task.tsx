@@ -1,4 +1,4 @@
-import type { AddTask } from '../../../../types'
+import type { AddTask, ConfirmTexts } from '../../../../types'
 import styles from './Task.module.css'
 import { Form } from './Form/Form'
 import { TrushCan } from '../TrushCan/TrushCan'
@@ -7,9 +7,10 @@ interface Props {
   addTasks: AddTask[]
   setAddTasks(addTasks: AddTask[]): void
   colors: string[]
+  confirm(texts: ConfirmTexts): Promise<boolean>
 }
 
-export const Task = ({ addTasks, setAddTasks, colors }: Props): React.JSX.Element => {
+export const Task = ({ addTasks, setAddTasks, colors, confirm }: Props): React.JSX.Element => {
   const MIMEType = 'add/task'
 
   const taskLists = addTasks.map((task) => (
@@ -35,7 +36,7 @@ export const Task = ({ addTasks, setAddTasks, colors }: Props): React.JSX.Elemen
         </section>
         <ul className={styles.tasks}>{taskLists}</ul>
       </section>
-      <TrushCan MIMEType={MIMEType} lists={addTasks} setter={setAddTasks} />
+      <TrushCan MIMEType={MIMEType} lists={addTasks} setter={setAddTasks} confirm={confirm} />
     </section>
   )
 }

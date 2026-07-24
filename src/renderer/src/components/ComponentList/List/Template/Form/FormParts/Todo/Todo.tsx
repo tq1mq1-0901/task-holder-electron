@@ -1,4 +1,9 @@
-import type { AddTemplate, AddTemplateSchdl, AddTemplateTodo } from '../../../../../../../types'
+import type {
+  AddTemplate,
+  AddTemplateSchdl,
+  AddTemplateTodo,
+  ConfirmTexts
+} from '../../../../../../../types'
 import {
   checkTimeConflict,
   convertTimeStrIntoDurationMin,
@@ -20,6 +25,7 @@ interface Props {
   setTodosLimitError(bool: boolean): void
   setTimeStraddleError(bool: boolean): void
   resetAllErrorMessage(): void
+  confirm(texts: ConfirmTexts): Promise<boolean>
 }
 
 export const Todo = (props: Props): React.JSX.Element => {
@@ -36,12 +42,20 @@ export const Todo = (props: Props): React.JSX.Element => {
     setTimeConflictError,
     setTodosLimitError,
     setTimeStraddleError,
-    resetAllErrorMessage
+    resetAllErrorMessage,
+    confirm
   } = props
 
   const todos = addTemplateTodos.map((todo) => {
-    const handleTodoDelBtn = (): void => {
-      if (!confirm('Delete this item?')) return
+    const handleTodoDelBtn = async (): Promise<void> => {
+      if (
+        !(await confirm({
+          title: '削除',
+          sentence: `${todo.title}を削除しますか？`,
+          note: ''
+        }))
+      )
+        return
 
       const newAddTemplateTodos = addTemplateTodos.filter(
         (el: AddTemplateTodo) => el.id !== todo.id
@@ -60,7 +74,7 @@ export const Todo = (props: Props): React.JSX.Element => {
     )
   })
 
-  const handleDropTodolist = (e: React.DragEvent<HTMLElement>): void => {
+  const handleDropTodolist = async (e: React.DragEvent<HTMLElement>): Promise<void> => {
     const types = Array.from(e.dataTransfer.types)
     const addTemplateFullType = types.find((type) => type.startsWith('add-template/'))
     const durationHasError = !Number(durationStr)
@@ -151,13 +165,34 @@ export const Todo = (props: Props): React.JSX.Element => {
 
       resetAllErrorMessage()
       if (data.isSchdlTemplate) {
-        if (!confirm('Overwrite only Schedule of this date?')) return
+        if (
+          !(await confirm({
+            title: '上書き',
+            sentence: `To${'-'}Doリストを上書きしますか？`,
+            note: '(スケジュールは上書きされません。)'
+          }))
+        )
+          return
         setSchdls(data.schdl)
       } else if (data.isTodoTemplate) {
-        if (!confirm('Overwrite only To-Do of this date?')) return
+        if (
+          !(await confirm({
+            title: '上書き',
+            sentence: 'スケジュールを上書きしますか？',
+            note: '(To-Doリストは上書きされません。)'
+          }))
+        )
+          return
         setTodos(data.todo)
       } else {
-        if (!confirm('Overwrite Schedule and To-Do?')) return
+        if (
+          !(await confirm({
+            title: '上書き',
+            sentence: 'すべてのタスクを上書きしますか？',
+            note: ''
+          }))
+        )
+          return
         setSchdls(data.schdl)
         setTodos(data.todo)
       }

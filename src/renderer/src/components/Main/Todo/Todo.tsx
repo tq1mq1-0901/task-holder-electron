@@ -6,7 +6,8 @@ import type {
   AddTask,
   DspSchdl,
   AddTemplateTodo,
-  AddTemplateSchdl
+  AddTemplateSchdl,
+  ConfirmTexts
 } from '../../../types'
 import { checkTimeConflict, createDateFormatStr, createDisplaySchedules } from '../../../util'
 import styles from './Todo.module.css'
@@ -20,10 +21,20 @@ interface Props {
   colors: string[]
   dspSchdls: DspSchdl[]
   setDspSchdls(schdls: DspSchdl[]): void
+  confirm(texts: ConfirmTexts): Promise<boolean>
 }
 
 export const Todo = (props: Props): React.JSX.Element => {
-  const { trgtDate, trgtDspTodos, dspTodos, setDspTodos, colors, dspSchdls, setDspSchdls } = props
+  const {
+    trgtDate,
+    trgtDspTodos,
+    dspTodos,
+    setDspTodos,
+    colors,
+    dspSchdls,
+    setDspSchdls,
+    confirm
+  } = props
 
   const [isSchdlAddable, setIsSchdlAddable] = useState<boolean>(false)
   const [dropedData, setDropedData] = useState<AddSchedule | AddTask | null>(null)
@@ -47,8 +58,15 @@ export const Todo = (props: Props): React.JSX.Element => {
     setDspTodos(newTodosForDisplay)
   }
 
-  const handleCheckedDelBtn = (): void => {
-    if (!confirm('Delete all completed To-Do?')) return
+  const handleCheckedDelBtn = async (): Promise<void> => {
+    if (
+      !(await confirm({
+        title: '削除',
+        sentence: '完了したすべてのTo-Doを削除してもよいですか？',
+        note: ''
+      }))
+    )
+      return
     const newTodos = dspTodos.filter(
       (todo) => todo.date !== createDateFormatStr(trgtDate) || todo.isComplete !== true
     )
@@ -56,14 +74,21 @@ export const Todo = (props: Props): React.JSX.Element => {
     setTodosLimitError(false)
   }
 
-  const handleAllDelBtn = (): void => {
-    if (!confirm('Delete all To-Do?')) return
+  const handleAllDelBtn = async (): Promise<void> => {
+    if (
+      !(await confirm({
+        title: '削除',
+        sentence: `すべてのTo${'-'}Doを削除しますか？`,
+        note: ''
+      }))
+    )
+      return
     const newTodos = dspTodos.filter((todo) => todo.date !== createDateFormatStr(trgtDate))
     setDspTodos(newTodos)
     setTodosLimitError(false)
   }
 
-  const handleDropTodo = (e: React.DragEvent<HTMLUListElement>): void => {
+  const handleDropTodo = async (e: React.DragEvent<HTMLUListElement>): Promise<void> => {
     setTodosLimitError(false)
     setStraddleSchdlConflictError(false)
 
@@ -130,15 +155,36 @@ export const Todo = (props: Props): React.JSX.Element => {
         setStraddleSchdlConflictError(true)
         return
       } else if (data.isTodoTemplate) {
-        if (!confirm(`Overwrite To-Do of this date?`)) return
+        if (
+          !(await confirm({
+            title: '上書き',
+            sentence: `${createDateFormatStr(trgtDate)}のTo${'-'}Doリストを上書きしますか？`,
+            note: '(スケジュールは上書きされません。)'
+          }))
+        )
+          return
         setDspTodos(newDspTodos)
         return
       } else if (data.isSchdlTemplate) {
-        if (!confirm(`Overwrite Schedule of this date?`)) return
+        if (
+          !(await confirm({
+            title: '上書き',
+            sentence: `${createDateFormatStr(trgtDate)}のスケジュールを上書きしますか？`,
+            note: '(To-Doは上書きされません。)'
+          }))
+        )
+          return
         setDspSchdls(newDspSchdls)
         return
       } else {
-        if (!confirm(`Overwrite this date?\n(This include Schedule and To-Do)`)) return
+        if (
+          !(await confirm({
+            title: '上書き',
+            sentence: `${createDateFormatStr(trgtDate)}のすべてのタスクを上書きしますか？`,
+            note: ''
+          }))
+        )
+          return
         setDspTodos(newDspTodos)
         setDspSchdls(newDspSchdls)
       }
@@ -146,8 +192,15 @@ export const Todo = (props: Props): React.JSX.Element => {
   }
 
   const todoItems = trgtDspTodos.map((todo) => {
-    const handleDelBtn = (): void => {
-      if (!confirm('Delete this item?')) return
+    const handleDelBtn = async (): Promise<void> => {
+      if (
+        !(await confirm({
+          title: '削除',
+          sentence: `「${todo.title}」を削除しますか？`,
+          note: ''
+        }))
+      )
+        return
       setDspTodos(dspTodos.filter((el) => el.id !== todo.id))
       setTodosLimitError(false)
     }
