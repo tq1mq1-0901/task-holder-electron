@@ -1,4 +1,8 @@
-.container {
+.mask:global(.mask) {
+  z-index: 200;
+}
+
+.container:global(.form) {
   top: 5%;
   bottom: none;
   width: 360px;
@@ -7,6 +11,7 @@
   display: flex;
   flex-direction: column;
   padding: 16px;
+  z-index: 201;
 }
 
 .sentences {

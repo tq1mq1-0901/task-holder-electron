@@ -13,7 +13,7 @@ export function Confirm(props: Props): React.JSX.Element {
 
   return (
     <>
-      <div className="mask"></div>
+      <div className={`mask ${styles.mask}`}></div>
       <div className={`form ${styles.container}`}>
         <section className={styles.sentences}>
           <p className={styles.title}>{title}</p>

@@ -91,7 +91,7 @@ button {
   border-radius: 16px;
   overflow: hidden;
   padding: 24px;
-  z-index: 200;
+  z-index: 101;
 }
 
 .error {
