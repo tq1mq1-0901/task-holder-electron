@@ -7,10 +7,15 @@ on:
   workflow_dispatch:
 
 jobs:
+  # ただのjob名
   build:
+    # jobを複数のパターンで実行させたいときにstrategyを指定
     strategy:
+      # 複数実行なのである一つがエラーになる場合がある、その時他も巻き込むか
       fail-fast: false
+      # 複数実行の列挙。
       matrix:
+        # 基本は - os: [~~, ~~] script: [~~~, ~~~]とするが今回みたいなwindows-latest x build:macなどがないようにするためos scriptを明示的に紐づけられる
         include:
           - os: windows-latest
             script: build:win
@@ -19,17 +24,23 @@ jobs:
           - os: ubuntu-latest
             script: build:linux
 
+    # どのマシン上でjobを動かすか。
     runs-on: ${{ matrix.os }}
 
     steps:
+      # Actionsを使うときの完全定石コマンド(まっさらなVMにcloneする感じ)
       - uses: actions/checkout@v4
 
+      # これも定石(VMにnpmなどのコマンドを使えるようにnodeをインストール)
       - uses: actions/setup-node@v4
+        # withはキー付きの引数みたいな感じ(今回の用途はバージョン指定)
         with:
           node-version: 20
 
+      # npmを使うciなら定石(npm installみたいな感じ。package-lock.jsonを確認してVMにインストール。package.jsonもみてバージョンに収まっているかも確認する。)
       - run: npm ci
 
+      # ビルド
       - run: npm run ${{ matrix.script }}
 
       - uses: actions/upload-artifact@v4
