@@ -6,6 +6,10 @@ on:
       - 'v*'
   workflow_dispatch:
 
+# GitHub Releasesへの公開(publish)にはcontents: writeの権限が必要
+permissions:
+  contents: write
+
 jobs:
   # ただのjob名
   build:
@@ -40,8 +44,10 @@ jobs:
       # npmを使うciなら定石(npm installみたいな感じ。package-lock.jsonを確認してVMにインストール。package.jsonもみてバージョンに収まっているかも確認する。)
       - run: npm ci
 
-      # ビルド
-      - run: npm run ${{ matrix.script }}
+      # ビルド + GitHub Releasesへの公開(--publish alwaysをelectron-builderに渡す)
+      - run: npm run ${{ matrix.script }} -- --publish always
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/upload-artifact@v4
         with:

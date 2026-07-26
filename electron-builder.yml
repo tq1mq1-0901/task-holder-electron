@@ -34,3 +34,7 @@ linux:
 appImage:
   artifactName: ${name}-${version}.${ext}
 npmRebuild: false
+publish:
+  provider: github
+  owner: tq1mq1-0901
+  repo: task-holder-electron
