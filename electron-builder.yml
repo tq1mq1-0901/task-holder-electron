@@ -37,3 +37,4 @@ publish:
   provider: github
   owner: tq1mq1-0901
   repo: task-holder-electron
+  releaseType: release
