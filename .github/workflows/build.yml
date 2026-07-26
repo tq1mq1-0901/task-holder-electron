@@ -17,6 +17,8 @@ jobs:
     strategy:
       # 複数実行なのである一つがエラーになる場合がある、その時他も巻き込むか
       fail-fast: false
+      # GitHub Releasesへのpublishが並列実行で競合し重複リリースが作られるのを防ぐため、順番に実行する
+      max-parallel: 1
       # 複数実行の列挙。
       matrix:
         # 基本は - os: [~~, ~~] script: [~~~, ~~~]とするが今回みたいなwindows-latest x build:macなどがないようにするためos scriptを明示的に紐づけられる
