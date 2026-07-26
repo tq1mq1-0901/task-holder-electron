@@ -11,14 +11,33 @@ permissions:
   contents: write
 
 jobs:
+  # ビルドより先にGitHub Releaseを1つだけ確実に作っておく(electron-builder自身の作成処理に任せると競合して重複することがあったため)
+  create-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Determine release tag
+        id: version
+        run: echo "tag=v$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${{ steps.version.outputs.tag }}" \
+            --repo "${{ github.repository }}" \
+            --title "${{ steps.version.outputs.tag }}" \
+            --generate-notes \
+            || echo "release already exists, continuing"
+
   # ただのjob名
   build:
+    needs: create-release
     # jobを複数のパターンで実行させたいときにstrategyを指定
     strategy:
       # 複数実行なのである一つがエラーになる場合がある、その時他も巻き込むか
       fail-fast: false
-      # GitHub Releasesへのpublishが並列実行で競合し重複リリースが作られるのを防ぐため、順番に実行する
-      max-parallel: 1
       # 複数実行の列挙。
       matrix:
         # 基本は - os: [~~, ~~] script: [~~~, ~~~]とするが今回みたいなwindows-latest x build:macなどがないようにするためos scriptを明示的に紐づけられる
