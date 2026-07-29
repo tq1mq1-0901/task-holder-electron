@@ -1,9 +1,19 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    top: -20%;
+  }
+  100% {
+    opacity: 1;
+    top: 5%;
+  }
+}
+
 .mask:global(.mask) {
   z-index: 200;
 }
 
 .container:global(.form) {
-  top: 5%;
   bottom: none;
   width: 360px;
   height: 180px;
@@ -11,6 +21,9 @@
   display: flex;
   flex-direction: column;
   padding: 16px;
+  animation-name: fadeIn;
+  animation-duration: .3s;
+  animation-fill-mode: forwards;
   z-index: 201;
 }
 
