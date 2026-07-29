@@ -6,7 +6,7 @@
 }
 
 .noteSec {
-  height: 60px;
+  height: 100px;
   display: flex;
   margin-top: 12px;
 }
@@ -34,10 +34,10 @@
 
 .noteSec > .note > textarea {
   flex: 1;
-  padding: 6px 8px;
+  padding: 2px 8px;
   color: var(--standard-font-color);
-  font-size: 0.8rem;
-  height: 40px;
+  font-size: 0.7rem;
+  height: 80px;
 }
 
 .note > textarea::-webkit-scrollbar {

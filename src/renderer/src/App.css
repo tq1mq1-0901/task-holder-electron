@@ -70,6 +70,10 @@ button {
   }
 }
 
+textarea {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .mask {
   position: absolute;
   top: 0;

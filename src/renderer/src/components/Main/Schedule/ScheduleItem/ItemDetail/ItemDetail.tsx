@@ -65,6 +65,7 @@ export const ItemDetail = (props: Props): React.JSX.Element => {
               defaultValue={noteValue}
               onChange={(e) => setNoteValue(e.currentTarget.value)}
               maxLength={120}
+              spellCheck={false}
             ></textarea>
           </li>
           <li className={styles.btns}>

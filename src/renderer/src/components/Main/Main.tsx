@@ -128,6 +128,7 @@ export const Main = (props: Props): React.JSX.Element => {
         <Calendar
           trgtMon={trgtMon}
           setTrgtMon={setTrgtMon}
+          trgtDate={trgtDate}
           setTrgtDate={setTrgtDate}
           dspTodos={dspTodos}
           dspSchdls={dspSchdls}

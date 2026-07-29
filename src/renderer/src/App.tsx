@@ -28,11 +28,12 @@ const colors = [
 ]
 
 function App(): React.JSX.Element {
+  const now = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())
   const [trgtMon, setTrgtMon] = useState<Date>(
     new Date(new Date().getFullYear(), new Date().getMonth(), 1)
   )
-  const [trgtDate, setTrgtDate] = useState<Date>(new Date())
-  const today = new Date()
+  const [trgtDate, setTrgtDate] = useState<Date>(now)
+  const today = now
   const [leftMainState, setLeftMainState] = useState<LeftMainState>(leftMainStates.schedule)
   const [isAddOpen, setIsAddOpen] = useState<boolean>(true)
   const [dspTodos, setDspTodos] = useLocalStorage<DspTodo[]>('dspTodos', [])

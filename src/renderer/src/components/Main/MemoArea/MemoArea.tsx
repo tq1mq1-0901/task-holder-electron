@@ -55,6 +55,7 @@ export const MemoArea = ({ trgtDate, memos, setMemos }: Props): React.JSX.Elemen
           maxLength={500}
           value={memo}
           onInput={handleInputMemo}
+          spellCheck={false}
         ></textarea>
       </section>
       <section className={styles.btns}>

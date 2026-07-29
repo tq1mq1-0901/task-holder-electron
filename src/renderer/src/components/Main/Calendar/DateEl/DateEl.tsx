@@ -3,6 +3,7 @@ import styles from './DateEl.module.css'
 
 interface Props {
   dateData: DateData
+  trgtDate: Date
   setTrgtDate(date: Date): void
   schdlLength: number
   todoLength: number
@@ -10,24 +11,28 @@ interface Props {
 
 export const DateEl = ({
   dateData,
+  trgtDate,
   setTrgtDate,
   schdlLength,
   todoLength
 }: Props): React.JSX.Element => {
   const { year, month, date, isToday, isSun, isSat, isThisMonth } = dateData
 
+  const dateObj = new Date(year, month, date)
+
   const className = [
     styles.container,
     isToday && styles.isToday,
     isSun && styles.isSun,
     isSat && styles.isSat,
-    isThisMonth && styles.isThisMonth
+    isThisMonth && styles.isThisMonth,
+    dateObj.getTime() === trgtDate.getTime() && styles.isTrgtDate
   ]
     .filter(Boolean)
     .join(' ')
 
   return (
-    <li className={className} onClick={() => setTrgtDate(new Date(year, month, date))}>
+    <li className={className} onClick={() => setTrgtDate(dateObj)}>
       <section className={styles.content}>
         <p className={styles.date}>{date}</p>
         <section className={styles.counters}>

@@ -28,6 +28,7 @@ export const Text = (props: Props): React.JSX.Element => {
           value={text}
           onChange={(e) => textSetter(e.currentTarget.value)}
           maxLength={120}
+          spellCheck={false}
         ></textarea>
       )}
     </label>

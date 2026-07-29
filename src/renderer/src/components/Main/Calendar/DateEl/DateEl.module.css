@@ -48,3 +48,9 @@
   justify-content: center;
   font-weight: bold;
 }
+
+.isTrgtDate .content,
+.isTrgtDate .content .date {
+  color: var(--orange);
+  font-weight: bold;
+}

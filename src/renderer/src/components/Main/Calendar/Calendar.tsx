@@ -11,13 +11,14 @@ import type { DspTodo, DspSchdl } from '../../../types'
 interface Props {
   trgtMon: Date
   setTrgtMon(date: Date): void
+  trgtDate: Date
   setTrgtDate(date: Date): void
   dspTodos: DspTodo[]
   dspSchdls: DspSchdl[]
 }
 
 export const Calendar = (props: Props): React.JSX.Element => {
-  const { trgtMon, setTrgtMon, setTrgtDate, dspTodos, dspSchdls } = props
+  const { trgtMon, setTrgtMon, trgtDate, setTrgtDate, dspTodos, dspSchdls } = props
 
   const dateDataArr = [
     ...createPrevMonthDates(trgtMon),
@@ -46,6 +47,7 @@ export const Calendar = (props: Props): React.JSX.Element => {
       <DateEl
         key={`${dateData.year}-${dateData.month}-${dateData.date}`}
         dateData={dateData}
+        trgtDate={trgtDate}
         setTrgtDate={setTrgtDate}
         schdlLength={trgtSchdlLength}
         todoLength={trgtTodoLength}
