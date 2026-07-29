@@ -61,15 +61,15 @@ export const Todo = (props: Props): React.JSX.Element => {
   const handleCheckedDelBtn = async (): Promise<void> => {
     if (
       !(await confirm({
-        title: '削除',
-        sentence: '完了したすべてのTo-Doを削除してもよいですか？',
+        title: '完了',
+        sentence: 'すべてのTo-Doを完了済みにしますか？',
         note: ''
       }))
     )
       return
-    const newTodos = dspTodos.filter(
-      (todo) => todo.date !== createDateFormatStr(trgtDate) || todo.isComplete !== true
-    )
+    const newTodos = dspTodos.map((todo) => {
+      return todo.date === createDateFormatStr(trgtDate) ? { ...todo, isComplete: true } : todo
+    })
     setDspTodos(newTodos)
     setTodosLimitError(false)
   }
