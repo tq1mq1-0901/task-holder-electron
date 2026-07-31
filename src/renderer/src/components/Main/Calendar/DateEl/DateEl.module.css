@@ -50,7 +50,7 @@
 }
 
 .isTrgtDate .content,
-.isTrgtDate .content .date {
+.container.isTrgtDate .content .date {
   color: var(--orange);
   font-weight: bold;
 }
