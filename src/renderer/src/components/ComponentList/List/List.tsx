@@ -11,19 +11,35 @@ import type {
   AddTodo,
   ConfirmTexts
 } from '../../../types'
-import { useLocalStorage } from '../../../hooks'
 
 interface Props {
   modes: AddMode[]
   colors: string[]
   confirm(texts: ConfirmTexts): Promise<boolean>
+  addTodos: AddTodo[]
+  setAddTodos(todos: AddTodo[]): void
+  addSchedules: AddSchedule[]
+  setAddSchedules(schedules: AddSchedule[]): void
+  addTasks: AddTask[]
+  setAddTasks(tasks: AddTask[]): void
+  addTemplates: AddTemplate[]
+  setAddTemplates(templates: AddTemplate[]): void
 }
 
-export const List = ({ modes, colors, confirm }: Props): React.JSX.Element => {
-  const [addTodos, setAddTodos] = useLocalStorage<AddTodo[]>('addTodos', [])
-  const [addSchedules, setAddSchedules] = useLocalStorage<AddSchedule[]>('addSchedules', [])
-  const [addTasks, setAddTasks] = useLocalStorage<AddTask[]>('addTasks', [])
-  const [addTemplates, setAddTemplates] = useLocalStorage<AddTemplate[]>('addTemplates', [])
+export const List = (props: Props): React.JSX.Element => {
+  const {
+    modes,
+    colors,
+    confirm,
+    addTodos,
+    setAddTodos,
+    addSchedules,
+    setAddSchedules,
+    addTasks,
+    setAddTasks,
+    addTemplates,
+    setAddTemplates
+  } = props
 
   return (
     <section className={styles.lists}>

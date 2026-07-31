@@ -4,7 +4,7 @@
   border-radius: 8px;
   overflow: hidden;
   margin: 0 auto;
-  padding: 0 0 2px;
+  padding: 0 8px 2px 0;
   transition: background 0.3s;
   cursor: pointer;
 
@@ -12,7 +12,12 @@
     background: var(--gray-background-color);
   }
 }
-.mode > label > span {
+.mode > label > .textContent {
   display: block;
   padding: 2px 0 0;
+}
+
+.mode > label > .counter {
+  margin-left: auto;
+  padding-top: 2px;
 }
