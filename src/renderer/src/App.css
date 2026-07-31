@@ -26,6 +26,18 @@
   --gray: #9e9e9e;
 }
 
+@keyframes formFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 * {
   user-select: none;
   box-sizing: border-box;
@@ -86,6 +98,9 @@ textarea {
 }
 
 .form {
+  animation-name: formFadeIn;
+  animation-duration: .3s;
+  animation-fill-mode: forwards;
   position: absolute;
   top: 10%;
   right: 10%;
