@@ -69,14 +69,14 @@ export const Time = (props: Props): React.JSX.Element => {
               </button>
               <button
                 type="button"
-                onClick={(e) => updateFormMin(e, 15, setStartDate)}
+                onClick={(e) => updateFormMin(e, 5, setStartDate)}
                 className={styles.minBtn}
               >
                 ▲
               </button>
               <button
                 type="button"
-                onClick={(e) => updateFormMin(e, -15, setStartDate)}
+                onClick={(e) => updateFormMin(e, -5, setStartDate)}
                 className={styles.minBtn}
               >
                 ▼
@@ -100,14 +100,14 @@ export const Time = (props: Props): React.JSX.Element => {
               </button>
               <button
                 type="button"
-                onClick={(e) => updateFormMin(e, 15, setEndDate)}
+                onClick={(e) => updateFormMin(e, 5, setEndDate)}
                 className={styles.minBtn}
               >
                 ▲
               </button>
               <button
                 type="button"
-                onClick={(e) => updateFormMin(e, -15, setEndDate)}
+                onClick={(e) => updateFormMin(e, -5, setEndDate)}
                 className={styles.minBtn}
               >
                 ▼
@@ -120,7 +120,7 @@ export const Time = (props: Props): React.JSX.Element => {
             placeholder="duration"
             value={durationStr === '0' ? '' : durationStr}
             min={0}
-            max={1425}
+            max={1439}
             // onChange={ handleDurationInput }
             readOnly
           />
