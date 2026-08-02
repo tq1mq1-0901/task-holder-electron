@@ -70,6 +70,7 @@ export const AddList = (props: Props): React.JSX.Element => {
             value={noteValue}
             onChange={(e) => setNoteValue(e.currentTarget.value)}
             maxLength={120}
+            spellCheck={false}
           ></textarea>
         </div>
       </section>

@@ -20,6 +20,7 @@ export const Text = (props: Props): React.JSX.Element => {
           name="schdlFormText"
           value={text}
           onChange={(e) => textSetter(e.currentTarget.value)}
+          spellCheck={false}
         />
       )}
       {!isText && (

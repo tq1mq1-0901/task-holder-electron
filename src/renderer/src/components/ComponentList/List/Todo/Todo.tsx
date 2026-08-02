@@ -56,6 +56,7 @@ export const Todo = ({ addTodos, setAddTodos, confirm }: Props): React.JSX.Eleme
               onChange={(e) => setInputValue(e.currentTarget.value)}
               ref={inputRef}
               maxLength={15}
+              spellCheck={false}
             />
             <button className={styles.formBtn}>Add</button>
           </form>

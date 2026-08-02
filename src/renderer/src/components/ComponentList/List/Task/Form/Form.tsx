@@ -44,6 +44,7 @@ export const Form = ({ addTasks, setAddTasks, colors }: Props): React.JSX.Elemen
         onChange={(e) => setInputValue(e.currentTarget.value)}
         ref={inputRef}
         maxLength={15}
+        spellCheck={false}
       />
       <div>
         <div className={styles.colorIcon} onClick={() => setColorSelectable((old) => !old)}>

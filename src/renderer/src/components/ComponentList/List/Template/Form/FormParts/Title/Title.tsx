@@ -17,6 +17,7 @@ export const Title = ({ inputValue, setInputValue, inputRef }: Props): React.JSX
         value={inputValue}
         onInput={(e) => setInputValue(e.currentTarget.value)}
         ref={inputRef}
+        spellCheck={false}
       />
     </label>
   )

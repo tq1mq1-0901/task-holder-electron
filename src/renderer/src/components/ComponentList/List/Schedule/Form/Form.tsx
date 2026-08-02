@@ -47,6 +47,7 @@ export const Form = ({ addSchedules, setAddSchedules, colors }: Props): React.JS
         onChange={(e) => setInputValue(e.currentTarget.value)}
         ref={inputRef}
         maxLength={15}
+        spellCheck={false}
       />
       <div>
         <div className={styles.colorIcon} onClick={() => setColorSelectable((old) => !old)}>
